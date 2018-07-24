@@ -1,0 +1,25 @@
+global:
+  resolve_timeout: 5m
+  slack_api_url: 'https://api.flock.com/hooks/sendMessage/dc5b3935-4cf8-4c50-baa5-1ebcfa91396e'
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 2h
+  receiver: 'Prometheus-Session'
+  routes:
+  - match:
+      severity: critical
+    receiver: 'Prometheus-Session'
+  - match:
+      severity: warning
+    receiver: 'Prometheus-Session'
+
+receivers:
+  - name: 'Prometheus-Session'
+    slack_configs:
+    - send_resolved: true
+      #url: 'http://172.17.0.4:1234/'
+      title: "{{ range .Alerts }}{{ .Annotations.description }} {{ end }}"
+      text: "Nodes: {{ range .Alerts }}{{ .Labels.instance }} {{ end }} \nDescription: {{ .CommonAnnotations.description }} \nSummary: {{ .CommonAnnotations.summary }}"
+#      title: "{{ range .Alerts }} \n {{ .Annotations.description }}\n {{ end }}\n"
