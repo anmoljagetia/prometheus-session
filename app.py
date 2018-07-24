@@ -10,8 +10,12 @@ host = socket.gethostname()
 
 @app.route('/')
 def hello():
-    redis.incr('hits')
-    return '<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <br />Hello World! <br />I have been seen %s times. <br />My Host name is %s <br />' % (redis.get('hits') ,host)
+    try:
+        redis.incr('hits')
+        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <br />Hello World! <br />I have been seen %s times. <br />My Host name is %s <br />' % (redis.get('hits') ,host)
+    except:
+        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <br />Hello World! <br />I have been seen 0 times. <br />My Host name is %s <br />' % (host)
+    return str(result)
 
 if __name__ == "__main__":
     monitor(app, port=8000)
