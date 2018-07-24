@@ -21,5 +21,5 @@ receivers:
     - send_resolved: true
       #url: 'http://172.17.0.4:1234/'
       title: "{{ range .Alerts }}{{ .Annotations.description }} {{ end }}"
-      text: "Nodes: {{ range .Alerts }}{{ .Labels.instance }} {{ end }} \nDescription: {{ .CommonAnnotations.description }} \nSummary: {{ .CommonAnnotations.summary }}"
+#      text: "Nodes: {{ range .Alerts }}{{ .Labels.instance }} {{ end }} \nDescription: {{ .CommonAnnotations.description }} \nSummary: {{ .CommonAnnotations.summary }}"
 #      title: "{{ range .Alerts }} \n {{ .Annotations.description }}\n {{ end }}\n"
