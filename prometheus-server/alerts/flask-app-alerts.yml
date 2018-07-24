@@ -2,7 +2,7 @@ groups:
 - name: flask-app-alerts
   rules:
   - alert: TooManyRequestCounts
-    expr: flask_request_count > 500
+    expr: flask_request_count > 20
     for: 5s
     labels:
       severity: critical

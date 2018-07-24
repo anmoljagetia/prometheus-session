@@ -10,3 +10,12 @@ groups:
       description: '[{{ $labels.exporter }}] {{ $labels.instance }} has been down for more
         than 1 min'
       summary: 'Service {{ $labels.instance }} down'
+  - alert: RedisDown
+    expr: redis_up == 0
+    for: 15s
+    labels:
+      severity: critical
+    annotations:
+      description: '[{{ $labels.exporter }}] {{ $labels.instance }} has been down for more
+        than 1 min'
+      summary: 'Service {{ $labels.instance }} down'
