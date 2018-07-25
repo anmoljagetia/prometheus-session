@@ -12,9 +12,9 @@ host = socket.gethostname()
 def hello():
     try:
         redis.incr('hits')
-        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <br />Hello World! <br />I have been seen %s times. <br />My Host name is %s <br />' % (redis.get('hits') ,host)
+        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <p align="center"> <br /><h1 align="center">I have been seen <b>%s</b> times.</h1><h2 align="center">My Host name is <br /><b>%s</b></h2></p>' % (int(redis.get('hits')) ,host)
     except:
-        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <br />Hello World! <br />I have been seen 0 times. <br />My Host name is %s <br />' % (host)
+        result='<img src="http://thecatapi.com/api/images/get?format=src&type=gif" style="display:block;margin-left:auto;margin-right:auto;width:50%%;height:50%%"> <p align="center"> <br /><h1 align="center">I have been seen <b>0</b> times.</h1><h2 align="center">My Host name is <br /><b>%s</b></h2></p>' % (host)
     return str(result)
 
 if __name__ == "__main__":
