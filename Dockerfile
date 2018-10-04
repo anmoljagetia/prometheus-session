@@ -1,11 +1,12 @@
+# Adds the source for python image
 FROM python:3.5.1-onbuild
+
+# Specifies the directory where the code will exist inside the container
 WORKDIR /code
+
+# Adds all the code to the relevant directory
 ADD . /code
-#COPY prometheus-node-exporter /etc/docker/
-#RUN chmod 777 /etc/docker/prometheus-node-exporter
-#ENV ARGS "-collector.diskstats.ignored-devices=^(ram|loop|fd)\d+$ -collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/) -collector.textfile.directory=/var/lib/prometheus/node-exporter" 
-#CMD python app.py
-#EXPOSE 9100
-#RUN /etc/docker/prometheus-node-exporter $ARGS &
+
+# Runs the app within the container
 CMD python app.py
 
